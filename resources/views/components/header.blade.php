@@ -1,6 +1,5 @@
 <header>
     <h1>
-        BLOG<br/>
-        {{$slot}}
+        BLOG {{$slot}}
     </h1>
 </header>

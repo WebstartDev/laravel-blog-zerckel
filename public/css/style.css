@@ -11,6 +11,7 @@ header {
     width: 100vw;
     background-color: #3498db;
     display: flex;
+    align-items: center;
     justify-content: center;
     height: 15vh;
 }
@@ -44,7 +45,7 @@ nav hr{
     margin: 0;
 }
 
-²{
+article{
     padding: 10px 15px;
     margin-bottom: 10px;
     border-top-left-radius: 5px;
@@ -53,10 +54,7 @@ nav hr{
     height: 100%;
     overflow-y: auto;
 }
-article{
-    width: 100%;
-    margin-left: 2vw;
-}
+
 .article{
     margin-bottom: 10px;
     padding: 10px;

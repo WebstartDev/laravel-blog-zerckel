@@ -62,3 +62,11 @@ article{
     background-color: #f5f6fa;
     flex-direction: column;
 }
+nav a, h1 a{
+    color: white;
+    text-decoration: none;
+}
+ article a{
+     color: black;
+     text-decoration: none;
+ }

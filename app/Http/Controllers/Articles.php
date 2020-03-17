@@ -76,13 +76,56 @@ class Articles extends Controller
         $this->categories = $categories;
     }
 
+    public  function fetchAuthor($name){
+        $name = urldecode($name);
+
+        $articles = DB::table('articles')->where('author', '=', $name)->get();
+
+        $this->setArticles($articles);
+        $this->setTitle('Author : '. $name);
+
+        return view('index', [
+            'articles' => $articles,
+            'categories' => $this->getCategories(),
+            'multiplesArticles' => false,
+            'title' => $this->getTitle()
+        ]);
+    }
+
+    public  function fetchArticle($id){
+        $article = DB::table('articles')->where('id', '=', $id)->get();
+
+
+        $this->setTitle($article[0]->title);
+
+        return view('index', [
+            'article' => $article[0],
+            'categories' => $this->getCategories(),
+            'multiplesArticles' => true,
+            'title' => $this->getTitle()
+        ]);
+    }
+
+    public function fetchCategory($code){
+        $code = urldecode($code);
+        $articles = DB::table('articles')->where([['category', '=', $code], ['is_published', '=', '1']])->get();
+
+        $this->setArticles($articles);
+        $this->setTitle('Category : '. $code);
+
+        return view('index', [
+            'articles' => $articles,
+            'categories' => $this->getCategories(),
+            'multiplesArticles' => false,
+            'title' => $this->getTitle()
+        ]);
+    }
 
     public function displayData(){
 
         $multiplesArticles = count($this->getCategories()) === 1 ?  true : false;
 
-        $articles = DB::table('articles')->get();
-
+        $articles = DB::table('articles')->where('is_published', '=', '1')->get();
         $this->setArticles($articles);
 
         return view('index', [

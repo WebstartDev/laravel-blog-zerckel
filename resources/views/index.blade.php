@@ -19,24 +19,46 @@
 <section>
     @component('components.nav')
         @foreach ($categories as $category)
-            <h2>{{ $category }}</h2>
+            <h2>
+                <a href="/category/{{$category}}">{{ $category }}</a>
+            </h2>
             <hr/>
+
         @endforeach
     @endcomponent
     @if($multiplesArticles)
-        @component('components.article')@endcomponent
+        @component('components.article')
+            <div>
+                <h2>
+                  {{$article->title}}
+                </h2>
+                <a href="/author/{{ $article->author }}">{{$article->author}}</a><br/>
+                <hr/>
+                <span>
+                    {{$article->content}}
+                </span>
+            </div>
+        @endcomponent
     @else
         @component('components.articles')
-            @foreach ($articles as $article)
-                @if($article->is_published)
-                    <div class="article">
-                       <h2> {{ $article->title }} </h2>
-                        <span>
-                        {{ $article->abstract }}
-                    </span>
-                    </div>
-                @endif
-            @endforeach
+
+            @if(!$articles->isEmpty())
+                @foreach ($articles as $article)
+                    <a href="/article/{{$article->id}}">
+                        <div class="article">
+                            <h2> {{ $article->title }} </h2>
+                            Author :    <a href="/author/{{ $article->author }}">{{$article->author}}</a><br/>
+                            <span>
+                            {{ $article->abstract }}
+                            </span>
+                        </div>
+                    </a>
+                @endforeach
+            @else
+                <div class="article">
+                    <h2> No articles for this category </h2>
+                </div>
+            @endif
         @endcomponent
     @endif
 </section>

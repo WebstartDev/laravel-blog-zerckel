@@ -1,5 +1,5 @@
 <header>
     <h1>
-        BLOG {{$slot}}
+        <a href="/">BLOG</a> {{$slot}}
     </h1>
 </header>
